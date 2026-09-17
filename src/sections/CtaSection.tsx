@@ -21,10 +21,10 @@ export default function CtaSection() {
           </div>
         </div>
         <svg className="cta-visual" viewBox="0 0 160 160" fill="none">
-          <rect x="18" y="46" width="108" height="70" rx="14" fill="#0c2419" stroke="#18e08a" strokeOpacity=".5" />
-          <rect x="18" y="46" width="108" height="18" rx="14" fill="#18e08a" fillOpacity=".22" />
-          <circle cx="44" cy="94" r="12" fill="#18e08a" fillOpacity=".8" />
-          <circle cx="60" cy="94" r="12" fill="#33f5a4" fillOpacity=".55" />
+          <rect x="18" y="46" width="108" height="70" rx="14" fill="#0c2419" stroke="#2ccb41" strokeOpacity=".5" />
+          <rect x="18" y="46" width="108" height="18" rx="14" fill="#2ccb41" fillOpacity=".22" />
+          <circle cx="44" cy="94" r="12" fill="#2ccb41" fillOpacity=".8" />
+          <circle cx="60" cy="94" r="12" fill="#45e058" fillOpacity=".55" />
           <rect x="86" y="86" width="30" height="8" rx="4" fill="#e7f5ee" fillOpacity=".5" />
           <rect x="86" y="98" width="20" height="6" rx="3" fill="#e7f5ee" fillOpacity=".3" />
         </svg>

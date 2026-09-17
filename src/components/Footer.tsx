@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { CometMark, InstagramIcon, TelegramIcon, XIcon } from './icons';
+import { CometLogo, InstagramIcon, TelegramIcon, XIcon } from './icons';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="footer-grid">
         <div className="footer-brand">
           <div className="brand">
-            <CometMark className="brand-mark" />
+            <CometLogo className="brand-mark" />
             Comet Wallet
           </div>
           <p>
@@ -90,6 +90,7 @@ export default function Footer() {
           <Link to="/privacy">Privacy Policy</Link>
           <Link to="/terms">Terms of Service</Link>
           <Link to="/cookies">Cookie Policy</Link>
+          <Link to="/account-deletion">Delete My Account</Link>
         </div>
       </div>
     </footer>

@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircleIcon, CometMark, ShieldLockIcon } from '../components/icons';
+import { ArrowRight, CheckCircleIcon, CometLogo, ShieldLockIcon } from '../components/icons';
 
 export default function Hero() {
   return (
@@ -75,7 +75,7 @@ export default function Hero() {
                 <span>●●●</span>
               </div>
               <div className="phone-brand">
-                <CometMark />
+                <CometLogo />
                 Comet Wallet
               </div>
               <div className="balance-card">

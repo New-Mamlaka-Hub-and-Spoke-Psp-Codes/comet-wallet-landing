@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, CometMark } from './icons';
+import { ArrowRight, CometLogo } from './icons';
 
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
@@ -13,7 +13,7 @@ export default function Nav() {
   return (
     <header className="wrap site-nav">
       <Link className="brand" to="/">
-        <CometMark className="brand-mark" />
+        <CometLogo className="brand-mark" />
         Comet Wallet
       </Link>
       <nav className="nav-links">

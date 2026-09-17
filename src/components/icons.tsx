@@ -1,11 +1,7 @@
-import type { SVGProps } from 'react';
+import type { ImgHTMLAttributes, SVGProps } from 'react';
 
-export function CometMark(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" {...props}>
-      <path d="M12 2v6M12 16v6M2 12h6M16 12h6M5.2 5.2l4.2 4.2M14.6 14.6l4.2 4.2M18.8 5.2l-4.2 4.2M9.4 14.6l-4.2 4.2" />
-    </svg>
-  );
+export function CometLogo(props: ImgHTMLAttributes<HTMLImageElement>) {
+  return <img src="/comet-logo.png" alt="Comet Wallet" {...props} />;
 }
 
 export function ArrowRight(props: SVGProps<SVGSVGElement>) {

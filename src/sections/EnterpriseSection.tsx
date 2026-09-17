@@ -4,7 +4,7 @@ export default function EnterpriseSection() {
   return (
     <section className="enterprise" id="security">
       <div className="enterprise-glow" />
-      <svg className="enterprise-badge" viewBox="0 0 100 100" fill="none" stroke="rgba(24,224,138,.5)" strokeWidth="1">
+      <svg className="enterprise-badge" viewBox="0 0 100 100" fill="none" stroke="rgba(44,203,65,.5)" strokeWidth="1">
         <circle cx="50" cy="50" r="34" />
         <circle cx="50" cy="50" r="24" />
         <path d="M50 6v10M50 84v10M6 50h10M84 50h10M17 17l7 7M76 76l7 7M83 17l-7 7M24 76l-7 7" />

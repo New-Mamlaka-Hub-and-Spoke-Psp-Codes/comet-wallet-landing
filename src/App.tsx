@@ -7,6 +7,7 @@ import NotFound from './pages/NotFound';
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const CookiePolicy = lazy(() => import('./pages/CookiePolicy'));
+const AccountDeletion = lazy(() => import('./pages/AccountDeletion'));
 
 export default function App() {
   return (
@@ -34,6 +35,14 @@ export default function App() {
           element={
             <Suspense fallback={null}>
               <CookiePolicy />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/account-deletion"
+          element={
+            <Suspense fallback={null}>
+              <AccountDeletion />
             </Suspense>
           }
         />
