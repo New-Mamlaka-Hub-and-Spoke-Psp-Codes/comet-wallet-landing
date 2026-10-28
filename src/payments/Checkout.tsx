@@ -90,11 +90,11 @@ export default function Checkout({
   if (!link) {
     return (
       <CheckoutShell>
-        <Notice
-          tone="error"
-          title="Payment link not found"
-          body={initialError && initialError !== 'Payment link not found' ? initialError : 'Check the link you were sent, or ask the merchant for a new one.'}
-        />
+        {!initialError || initialError === 'Payment link not found' ? (
+          <Notice tone="error" title="Payment link not found" body="Check the link you were sent, or ask the merchant for a new one." />
+        ) : (
+          <Notice tone="error" title="We couldn't load this payment" body={initialError} />
+        )}
       </CheckoutShell>
     );
   }
