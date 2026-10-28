@@ -1,0 +1,431 @@
+/* The payment-link checkout uses Comet Wallet's own palette
+   (Comet_Wallet/lib/constants/colors.dart), not the landing page's: zinc
+   neutrals on white in light mode, the brand's deep teal in dark mode, the
+   signature green for every primary action, and the app's Geist font.
+   Everything is scoped under .pay so it can't leak into the site. */
+@font-face {
+  font-family: 'Geist';
+  src: url('./fonts/Geist-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./fonts/Geist-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./fonts/Geist-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./fonts/Geist-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+.pay {
+  --pay-background: #fafafa;
+  --pay-card: #ffffff;
+  --pay-surface: #f4f4f5;
+  --pay-border: #e4e4e7;
+  --pay-text: #18181b;
+  --pay-text-2: #71717a;
+  --pay-text-3: #a1a1aa;
+  --pay-brand: #2ccb41;
+  --pay-success: #22c55e;
+  --pay-warning: #f59e0b;
+  --pay-error: #ef4444;
+  color-scheme: light;
+  min-height: 100dvh;
+  background: var(--pay-background);
+  color: var(--pay-text);
+  font-family: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.5;
+}
+@media (prefers-color-scheme: dark) {
+  .pay {
+    --pay-background: #122023;
+    --pay-card: #1a1f26;
+    --pay-surface: #222830;
+    --pay-border: #2a3441;
+    --pay-text: #ffffff;
+    --pay-text-2: rgb(255 255 255 / 0.7);
+    --pay-text-3: rgb(255 255 255 / 0.6);
+    color-scheme: dark;
+  }
+}
+.pay h1 {
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+.pay a {
+  text-decoration: underline;
+}
+.pay :focus-visible {
+  outline-color: var(--pay-brand);
+}
+
+.pay-shell {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  width: 100%;
+  max-width: 448px;
+  padding: 24px 24px 32px;
+}
+.pay-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pay-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.pay-secure {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--pay-text-2);
+}
+.pay-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+}
+.pay-footer {
+  padding-top: 32px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--pay-text-3);
+}
+.pay-loading {
+  margin: auto;
+  color: var(--pay-brand);
+}
+
+/* ---------- amount, as on the app's Receive screen ---------- */
+.pay-amount {
+  text-align: center;
+}
+.pay-amount-label {
+  font-size: 13px;
+  color: var(--pay-text-2);
+}
+.pay-amount-value {
+  margin-top: 6px;
+  overflow-wrap: anywhere;
+}
+.pay-currency {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--pay-text-3);
+}
+.pay-figure {
+  font-size: 52px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.pay-description {
+  margin-top: 16px;
+  font-size: 15px;
+  color: var(--pay-text-2);
+}
+.pay-ref {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--pay-text-3);
+}
+
+/* ---------- actions ---------- */
+.pay-actions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 48px;
+}
+.pay-form {
+  display: flex;
+  flex-direction: column;
+}
+.pay-label {
+  font-size: 12px;
+  color: var(--pay-text-2);
+}
+.pay-field {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  border: 1px solid var(--pay-border);
+  border-radius: 14px;
+  background: var(--pay-card);
+}
+.pay-field:focus-within,
+.pay-input:focus {
+  border-color: var(--pay-brand);
+}
+.pay-field input,
+.pay-input {
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  outline: none;
+}
+.pay-field input {
+  padding: 16px 0;
+  font-size: 17px;
+  font-weight: 500;
+}
+.pay-input {
+  margin-top: 8px;
+  padding: 16px;
+  font-size: 15px;
+  border: 1px solid var(--pay-border);
+  border-radius: 14px;
+  background: var(--pay-card);
+}
+.pay-field input::placeholder,
+.pay-input::placeholder {
+  color: var(--pay-text-3);
+}
+.pay-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--pay-text-3);
+}
+.pay-error {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--pay-error);
+}
+.pay-text {
+  margin-top: 8px;
+  font-size: 15px;
+  color: var(--pay-text-2);
+}
+.pay-center {
+  text-align: center;
+}
+.pay-gap-lg {
+  margin-top: 24px;
+}
+.pay-gap-sm {
+  margin-top: 12px;
+}
+
+.pay-methods {
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 14px;
+  background: var(--pay-surface);
+}
+.pay-methods button {
+  padding: 10px 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--pay-text-2);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+.pay-methods button:hover {
+  color: var(--pay-text);
+}
+.pay-methods button[aria-checked='true'] {
+  background: var(--pay-card);
+  color: var(--pay-text);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+}
+
+/* ---------- buttons: the app's 14px-radius ElevatedButton ---------- */
+.pay-btn {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 0;
+  border-radius: 14px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+.pay-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.pay-btn-primary {
+  border: 0;
+  background: var(--pay-brand);
+  color: #fff;
+  font-weight: 700;
+}
+.pay-btn-primary:hover:not(:disabled) {
+  opacity: 0.9;
+}
+.pay-btn-secondary {
+  border: 1px solid var(--pay-border);
+  background: var(--pay-card);
+  color: var(--pay-text);
+  font-weight: 600;
+}
+.pay-btn-secondary:hover:not(:disabled) {
+  background: var(--pay-surface);
+}
+
+/* ---------- Comet Wallet option ---------- */
+.pay-wallet {
+  display: flex;
+  flex-direction: column;
+}
+.pay-qr {
+  margin-top: 24px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+.pay-qr p {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--pay-brand);
+}
+.pay-qr-box {
+  width: 192px;
+  height: 192px;
+  padding: 16px;
+  border: 1px solid var(--pay-border);
+  border-radius: 14px;
+  background: var(--pay-card);
+}
+.pay-qr-box svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pay .pay-open-app {
+  margin-top: 24px;
+  text-decoration: none;
+}
+.pay-open-app img {
+  border-radius: 6px;
+  background: #fff;
+}
+.pay-store {
+  margin-top: 16px;
+}
+/* Phones open the app directly; larger screens scan the QR with it. */
+@media (min-width: 768px) {
+  .pay-qr {
+    display: flex;
+  }
+  .pay .pay-open-app {
+    display: none;
+  }
+}
+
+/* ---------- status screens ---------- */
+.pay-status {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 48px;
+  text-align: center;
+}
+.pay-status-flush {
+  margin-top: 0;
+  padding-top: 0;
+}
+.pay-status > .pay-btn {
+  align-self: stretch;
+}
+.pay-notice {
+  margin-block: auto;
+}
+.pay-badge {
+  display: flex;
+  width: 64px;
+  height: 64px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+}
+.pay-badge + h1 {
+  margin-top: 20px;
+}
+.pay-status > h1:first-child {
+  margin-top: 0;
+}
+.pay-badge-brand {
+  background: rgb(44 203 65 / 0.1);
+  color: var(--pay-brand);
+}
+.pay-badge-success {
+  background: rgb(34 197 94 / 0.15);
+  color: var(--pay-success);
+}
+.pay-badge-warning {
+  background: rgb(245 158 11 / 0.15);
+  color: var(--pay-warning);
+}
+.pay-badge-error {
+  background: rgb(239 68 68 / 0.15);
+  color: var(--pay-error);
+}
+.pay-sent {
+  margin-top: 32px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: var(--pay-surface);
+  text-align: center;
+  font-size: 14px;
+  color: var(--pay-text-2);
+}
+.pay-receipt {
+  margin-top: 32px;
+}
+
+.pay-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 999px;
+  animation: pay-spin 0.8s linear infinite;
+}
+.pay-spinner-large {
+  width: 28px;
+  height: 28px;
+  border-width: 3px;
+}
+@keyframes pay-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
