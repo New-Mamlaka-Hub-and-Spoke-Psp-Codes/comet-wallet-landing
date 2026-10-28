@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["78AD32JAW6.com.cometswitch.kenya"],
+        "components": [
+          { "/": "/payments/*", "comment": "Payment links" },
+          { "/": "/payment-links/*", "comment": "Older payment links" }
+        ]
+      }
+    ]
+  }
+}

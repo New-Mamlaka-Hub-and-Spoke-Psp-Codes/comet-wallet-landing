@@ -11,7 +11,7 @@ npm run build
 
 ## Payment-link checkout
 
-Links are created from the app's Receive screen. Comet-dashboard builds them as `<CHECKOUT_PAGE_BASE_URL>/payments/<short_code>`, so set `CHECKOUT_PAGE_BASE_URL` on the dashboard to this site's origin (`https://cometagri.com` in production). `/payment-links/:code` redirects to `/payments/:code`.
+The site is served at **https://cometwallet.mamlakapsp.com**. Links are created from the app's Receive screen. Comet-dashboard builds them as `<CHECKOUT_PAGE_BASE_URL>/payments/<short_code>`, and `CHECKOUT_PAGE_BASE_URL` defaults to that URL in every environment, local included. `/payment-links/:code` redirects to `/payments/:code`.
 
 The payer picks one of two methods:
 
@@ -25,9 +25,9 @@ The page calls the dashboard's public API under `/api/v1/payment-links`: `GET /:
 | Where | How the API is reached |
 |---|---|
 | Dev | Vite proxies `/api` to `COMET_API_URL` (default `http://localhost:8092`). The browser only talks to its own origin. |
-| Production build | The browser calls `VITE_COMET_API_URL` (default `https://cometapi.mamlakapsp.com`). Add this site's origin to the dashboard's `CORS_ALLOWED_ORIGINS`. |
+| Production build | The browser calls `VITE_COMET_API_URL` (default `https://cometapi.mamlakapsp.com`). The dashboard always CORS-allows the origin of its `CHECKOUT_PAGE_BASE_URL`. |
 
-Host the build with an SPA fallback (every path serves `index.html`), as the legal pages already need.
+Host the build with an SPA fallback (every path serves `index.html`), as the legal pages already need. `public/.well-known/apple-app-site-association` lets iOS open `/payments/*` in the app. Android App Links also need `public/.well-known/assetlinks.json` with the release signing certificate's SHA-256, which you can find in Play Console under App integrity.
 
 ---
 
