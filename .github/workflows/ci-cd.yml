@@ -1,0 +1,48 @@
+name: CI/CD
+
+# CI runs on GitHub's machines for every push and PR.
+# A push to main that passes CI deploys to production (payshield) via the
+# self-hosted runner and /home/ubuntu/comet/ci/deploy.sh (see the comet-deploy repo),
+# which backs up first and rolls back automatically if the health check fails.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: npm run lint
+
+  # Public repo: the payshield runner only serves private repos (fork PRs could
+  # otherwise run code on production). Deploys start once this repo is private.
+  deploy:
+    needs: ci
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && !github.event.repository.fork && github.event.repository.private
+    runs-on: [self-hosted, payshield]
+    concurrency:
+      group: deploy-landing
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0   # deploy.sh diffs against the deployed commit to find deleted files
+      - name: Deploy to payshield
+        run: /home/ubuntu/comet/ci/deploy.sh landing
